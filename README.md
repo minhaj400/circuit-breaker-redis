@@ -1,11 +1,11 @@
-# ⚡ Redis Circuit Breaker Example
+# Redis Circuit Breaker Example
 
-> 🛠️ A minimal **distributed circuit breaker implementation** using **Redis**  
-> 🚦 Built for **service-to-service communication** with simple **gateway + microservices architecture**
+> A minimal **distributed circuit breaker implementation** using **Redis**  
+> Built for **service-to-service communication** with simple **gateway + microservices architecture**
 
 ---
 
-## 🌉 Architecture Overview
+## Architecture Overview
 
 ```mermaid
 graph TD
@@ -20,18 +20,18 @@ graph TD
 
 ---
 
-## ✨ Features
+## Features
 
-- ✅ Simple Gateway to route requests
-- ✅ Two microservices: `AuthService` and `ProfileService`
-- ✅ Circuit Breaker logic at `ProfileService` to manage `AuthService` calls
-- ✅ Redis used for:
-  - 🔁 Shared state management (failures, open/close logic)
-  - 🌐 Distributed control across instances
+- Simple Gateway to route requests
+- Two microservices: `AuthService` and `ProfileService`
+- Circuit Breaker logic at `ProfileService` to manage `AuthService` calls
+- Redis used for:
+  - Shared state management (failures, open/close logic)
+  - Distributed control across instances
 
 ---
 
-## 🚦 Circuit Breaker Flow
+## Circuit Breaker Flow
 
 ```
             .---------------------------.
@@ -57,31 +57,31 @@ Request --> | Is Circuit Open?         |
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
-📦project-root
- ┣ 📁gateway
- ┃ ┗ 📄index.js
- ┣ 📁auth-service
- ┃ ┗ 📄auth.js
- ┣ 📁profile-service
- ┃ ┗ 📄profile.js  <- Contains Circuit Breaker logic
- ┣ 📁redis
- ┣ 📄README.md
+.project-root
+ ┣ /gateway
+ ┃ ┗ index.js
+ ┣ /auth-service
+ ┃ ┗ auth.js
+ ┣ /profile-service
+ ┃ ┗ profile.js  <- Contains Circuit Breaker logic
+ ┣ redis
+ ┣ README.md
 ```
 
 ---
 
-## 🔧 Custom Logic
+## Custom Logic
 
 - The circuit breaker stores:
-  - ✅ Failure count
-  - ✅ Last failure timestamp
-  - ✅ Cooldown duration
+  - Failure count
+  - Last failure timestamp
+  - Cooldown duration
 - These are used to determine:
-  - 🔁 When to retry
-  - 🔒 When to stop calling `AuthService`
+  - When to retry
+  - When to stop calling `AuthService`
 
 Redis Keys:
 ```bash
@@ -92,28 +92,28 @@ cb:auth:lastFailure   // Timestamp of last failure
 
 ---
 
-## 🧩 Future Enhancements
+## Future Enhancements
 
-- 🧠 Auto-recovery based on success ratio
-- 🔌 Pluggable strategy for breaker logic
-- ⚙️ adding correct fallback result
+- Auto-recovery based on success ratio
+- Pluggable strategy for breaker logic
+- adding correct fallback result
 
 ---
 
-## 🎬 Request Flow
+## Request Flow
 
 ```text
-Request ---> 🌉 Gateway ---> 👤 ProfileService ---❓---> 🔐 AuthService
+Request ---> Gateway ---> ProfileService ---❓---> AuthService
                                   |     ▲
                                   ▼     |
-                             🧠 Circuit Breaker (Redis)
+                             Circuit Breaker (Redis)
                                   |
                          [ OPEN 🔴 / CLOSED 🟢 ]
 ```
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # 1. Clone the repository
@@ -133,16 +133,16 @@ cd ..  # back to project root
 docker-compose up
 ```
 
-> ✅ Make sure Redis is running via Docker Compose.  
-> ⚙️ You can modify Redis or service ports in `.env` as needed.
+> Make sure Redis is running via Docker Compose.  
+> You can modify Redis or service ports in `.env` as needed.
 
 
 ---
 
-> 🧠 **Tip**: This repo shows how you can **build your own Resilience Layer** without 3rd-party libraries using pure Node.js and Redis.
+> **Tip**: This repo shows how you can **build your own Resilience Layer** without 3rd-party libraries using pure Node.js and Redis.
 
 ---
 
-## 📜 License
+## License
 
 MIT © 2025
